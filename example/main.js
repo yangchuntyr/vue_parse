@@ -1,7 +1,4 @@
-/**
- * @author monkeywang
- * Date: 2018/4/8
- */
+
 let app = new Wue({
     el: '#app',
     data: {
