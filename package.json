@@ -10,21 +10,21 @@
   },
   "files": [
     "src",
-    "lib"
+    "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/monkeyWangs/wue.git"
+    "url": ""
   },
   "keywords": [
     "MVVM"
   ],
-  "author": "mnonkeywang",
+  "author": "yangchun",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/monkeyWangs/wue/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/monkeyWangs/wue#readme",
+  "homepage": "",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
