@@ -3,7 +3,7 @@
 import proxy from './instance/proxy';
 import initOptions from './instance/init';
 import Compiler from './compile';
-import { Watcher ,firstNotify}from './observer/Watcher';
+import Watcher from './observer/Watcher';
 import {callHook} from './instance/lifecycle';
 
 
@@ -16,6 +16,7 @@ export default class Wue {
         vm.$watch = function (key, cb) {
             new Watcher(vm, key, cb);//cb是callback回调函数 这里解读为监控某个data里的key 发生变化就执行回调函数
         };
+        console.log(vm);
         initOptions(vm);//第一次把data上的数据变成响应式时 没有收集到任何依赖
 
         for (let key in vm._data) { //让this代理 data里的数据

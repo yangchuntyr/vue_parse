@@ -1,50 +1,48 @@
-import Dep, {popTarget, pushTarget } from './dep';
+import Dep from './dep';
 
-export  class Watcher {
-    constructor (vm, expression, cb) {
-        this.vm = vm;
-        this.cb = cb;
-        this.expression = expression;
-
-        this.oldValue = this.getVal();
+class Watcher{
+    constructor(vm,express,callBack){
+        this.vm=vm;
+        this.express=express;
+        this.callBack=callBack;
+    
+        this.oldValue=this.getinitValue();
+        console.log('555555');
     }
-    getVal () {
-     
-        let val = this.vm;
-        let keys=  this.expression.split('.');
-        keys.forEach((key) => {
-            if(key==keys[keys.length-1]){//如deep.a这样的表达式中 只有key==a时才能推入监听者
-                pushTarget(this);
+
+    // addDep(dep){
+    //     dep.addDep(this);
+    // }
+    getinitValue(){
+    
+        let val=this.vm;
+        let arry=  this.express.split('.');
+        arry.forEach((item,index)=>{
+            if(index==arry.length-1){
+                //setCurrentTarget
+                Dep.setCurrentTarget(this);
             }
-            val = val[key];
+            val=val[item];
         });
-        popTarget();
+        Dep.clearTarget();
+        return val;   
+    }
+
+    _getVal(){
+        let val=this.vm;
+        this.express.split('.').forEach(item=>{
+            val=val[item];
+        });
+
         return val;
     }
-    /**
-   * 添加依赖
-   * 
-   * @param {any} dep 
-   * 
-   * @memberOf Watcher
-   */
-    addDep (dep) {
-        dep.addSub(this);
-    }
 
-    update () {
+    update(){
+        let newValue=   this._getVal();
+        this.callBack.call(this.vm,newValue,this.oldValue);
+        this.oldValue=newValue;
       
-        let newVal = this.vm;
-        this.expression.split('.').forEach((key) => {
-            newVal = newVal[key];
-        });
-        this.cb.call(this.vm, newVal, this.oldValue);
     }
 }
 
-export function firstNotify(){
-    let dep = new Dep();
-  
-    Dep.targetStack;
-    dep.notify();
-}
+export default Watcher;

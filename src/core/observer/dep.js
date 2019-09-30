@@ -1,47 +1,28 @@
+class Dep{
+    constructor(){
+        this.watchers=[];
+    }
 
-export default class Dep {
-    constructor () {
-        this.sub = [];
+    addDepend(){
+        this.watchers.push(Dep.target);
     }
-    addDepend () {
-    //这个target就是watch 收集依赖类的收集目标就是watch watch在这里把依赖收集器传递进去被自己使用
-        Dep.target.addDep(this);
-    
+
+    notify() {
+        this.watchers.forEach(item => {
+            item.update(); 
+        }); 
     }
-    /**
-     * sub 是一个watch
-     * 
-     * @param {any} sub 
-     * 
-     * @memberOf Dep
-     */
-    addSub (sub) {
-        this.sub.push(sub);
-    }
-    notify () {
-        for (let sub of this.sub) {
-            sub.update();
-        }
-    }
+
+
 }
-
 /**当前监听对象 */
 Dep.target = null;
 
-//记录很多个监听者
-Dep.targetStack = [];
+Dep.setCurrentTarget=function(watcher){
+    Dep.target = watcher;  
+};
 
-export function pushTarget (_target) {
-
-    // if (Dep.target) Dep.targetStack.push(Dep.target);
-    Dep.target = _target;
-}
-
-export function popTarget () {
-   
-    //  Dep.target = Dep.targetStack.pop();
-    Dep.target = null;
-}
-
-
-
+Dep.clearTarget=function(){
+    Dep.target =null;   
+};
+export default Dep;

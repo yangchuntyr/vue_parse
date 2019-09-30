@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
-    "dev": "webpack --watch --mode development --output ./lib/index.js",
-    "build": "webpack --mode production  --output ./lib/index.js"
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --open"
   },
   "files": [
     "src",
@@ -30,6 +30,7 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "webpack": "^4.4.1",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
   }
 }
