@@ -8,7 +8,7 @@ module.exports = {
     }
    
     ,    output: {
-        path: path.resolve(__dirname, 'dist'),//这里一定要说绝对路径
+        path: path.resolve(__dirname, 'dist'),//这里一定要是绝对路径
         filename: '[name].js',
       
     },
